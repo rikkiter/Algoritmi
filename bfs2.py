@@ -1,13 +1,13 @@
 from collections import deque
 
 
-graph = {"S": ("A", "C"), "A": ("B", "F"), "C": ("B", "D"), "D": ("F",), "B": (None,)}
+graph = {"CAB": ("CAT", "CAR"), "CAR": ("BAR", "CAT"), "CAT": ("MAT", "BAT"), "BAR": ("BAT",), "MAT": ("BAT",)}
 search_queue = deque()
-search_queue += graph["S"]
-destination = "F"
+search_queue += graph["CAB"]
+destination = "BAT"
 path = 0
 temp = 0
-levels = [len(graph["S"])]
+levels = [len(graph["CAB"])]
 while search_queue:
     point = search_queue.popleft()
     temp += 1
