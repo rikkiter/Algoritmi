@@ -16,7 +16,6 @@ while search_queue:
         temp = 0
         levels.append(0)
     if point == destination:
-        print(point)
         break
     else:
         search_queue += graph[point]
