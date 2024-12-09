@@ -1,7 +1,6 @@
 from time import sleep
 from collections import deque
 from random import *
-import os
 
 
 '''Поле лабиринта задаётся нулями и единицами, где ноль выступает в роли стены, а единица - пути'''
@@ -28,10 +27,10 @@ test1_labyrinth = [
 class Labyrinth:
 
     def __init__(self, labyrinth):
-        self.width = 4
-        self.height = 4
-        #self.labyrinth = [[randint(0, 1) for _ in range(self.width)] for _ in range(self.height)]
-        self.labyrinth = labyrinth
+        self.width = 8
+        self.height = 8
+        self.labyrinth = [[randint(0, 1) for _ in range(self.width)] for _ in range(self.height)]
+        #self.labyrinth = labyrinth
 
     def show_labyrinth(self):
         coors = list(str(i) for i in range(self.width))
@@ -65,24 +64,27 @@ class Labyrinth:
     def search(self, start, destination):
         graph = self.create_connections()
         search_queue = deque()
-        search_queue += graph[start]
-        searched = []
-        path = 0
+        try:
+            search_queue += graph[start]
+        except KeyError:
+            return -1
+        searched = [start]
+        path = 1
         temp = 0
-        levels = [len(graph[start])]
+        levels = [len(graph[start]), 0]
         while search_queue:
             point = search_queue.popleft()
             temp += 1
-            if temp == levels[path]:
+            levels[path] = levels[path] + len(set(graph[point]) - set(searched))
+            if point == destination:
+                return path
+            else:
+                search_queue += list(set(graph[point]) - set(searched))
+                searched.append(point)
+            if temp == levels[path-1]:
                 path += 1
                 temp = 0
-            if point not in searched:
-                if point == destination:
-                    return path
-                else:
-                    search_queue += graph[point]
-                    levels.append(len(graph[point]))
-                    searched.append(point)
+                levels.append(0)
         return -1
 
 
@@ -111,14 +113,16 @@ class Main:
     def run(self):
         self.UI.generate()
         self.lab.show_labyrinth()
-        #print(self.lab.create_connections())
-        start, end = self.UI.get_coordinate()
-        if self.lab.check_start_n_end(start, end) == -2:
-            return -2
-        return self.lab.search(start, end)
+        print(self.lab.create_connections())
+        while True:
+            start, end = self.UI.get_coordinate()
+            if self.lab.check_start_n_end(start, end) == -2:
+                print(-2)
+            else:
+                print(self.lab.search(start, end))
 
 
-print(Main().run())
+Main().run()
 
 
 
