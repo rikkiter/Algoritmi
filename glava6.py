@@ -33,7 +33,6 @@ class Labyrinth:
         #self.labyrinth = [[randint(0, 1) for _ in range(self.width)] for _ in range(self.height)]
         self.labyrinth = labyrinth
 
-
     def show_labyrinth(self):
         coors = list(str(i) for i in range(self.width))
         print(f'* {" ".join(coors)}')
