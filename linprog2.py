@@ -2,8 +2,8 @@ from pulp import LpMaximize, LpProblem, LpStatus, lpSum, LpVariable
 
 model = LpProblem(name="small-problem", sense=LpMaximize)
 
-x = LpVariable(name="x", lowBound=0)
-y = LpVariable(name="y", lowBound=0)
+x = LpVariable(name="x")
+y = LpVariable(name="y")
 
 model += (-30 * x + 36 * y >= 294, "red_constraint")
 model += (-10 * x - 27 * y >= -2788, "blue_constraint")
@@ -15,8 +15,8 @@ status = model.solve()
 print(model.objective.value())
 # model = LpProblem(name="small-problem")
 #
-# x = LpVariable(name="x", lowBound=0)
-# y = LpVariable(name="y", lowBound=0)
+# x = LpVariable(name="x")
+# y = LpVariable(name="y")
 #
 # model += (7 * x + 6 * y >= 395, "red_constraint")
 # model += (-21 * x + 3 * y >= -1101, "blue_constraint")
@@ -30,8 +30,8 @@ print(model.objective.value())
 
 # model = LpProblem(name="small-problem")
 #
-# x = LpVariable(name="x", lowBound=0)
-# y = LpVariable(name="y", lowBound=0)
+# x = LpVariable(name="x")
+# y = LpVariable(name="y")
 #
 # model += (9 * x + 12 * y >= 885, "red_constraint")
 # model += (-81 * x - 6 * y >= -5109, "blue_constraint")
