@@ -33,7 +33,7 @@ class RadioGaga:
 
     def __imp_on_pr(self, station):
         if station is None:
-            return float("inf")
+            return -float("inf")
         importance = 0
         for state in (self.stations[station] - self.states_covered):
             importance += self.state_importance.get(state, 0)
@@ -49,7 +49,7 @@ class RadioGaga:
                     best_station = station
                     states_covered = covered
                 elif len(covered) == len(states_covered):
-                    if self.__imp_on_pr(best_station) > self.__imp_on_pr(station):
+                    if self.__imp_on_pr(best_station) < self.__imp_on_pr(station):
                         best_station = station
                         states_covered = covered
             self.states_covered |= states_covered
@@ -59,4 +59,5 @@ class RadioGaga:
 
 
 r = RadioGaga()
-print(r.get_solution())
+print(*r.get_solution())
+
