@@ -24,12 +24,13 @@ def backpack(max_weight=0, stuff=None):
                 dp[item][weight] = dp[item-1][weight]
     return dp[-1][-1] + bank
 
+
 test_stuff = {'banana': {"price": 10, "weight": 10}, 'balloons': {"price": 10, "weight": -10},
               'dope': {"price": 5000, "weight": 5}, 'iphone': {"price": 10000, "weight": 100},
               'bmw': {"price": 100000, "weight": 5000}, 'magic_item': {"price": 3999, "weight": -17}}
 
 test_stuff2 = {'gitara': {"price": 1500, "weight": 1}, 'notebook': {"price": 2000, "weight": 3},
-              'magnitofon': {"price": 3000, "weight": 4}}
+               'magnitofon': {"price": 3000, "weight": 4}}
 
 print(backpack(max_weight=70, stuff=test_stuff))
 print(backpack(max_weight=4, stuff=test_stuff2))
