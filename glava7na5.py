@@ -126,6 +126,7 @@ bellman_ford(n)
 class MangoSeller():
     def __init__(self):
         self.mango_sellers_list = ["semen bakin", "slava kpps", "daniil guskov"]
+
     def person_is_seller(self, name):
         return name in self.mango_sellers_list
 
