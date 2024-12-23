@@ -1,0 +1,3 @@
+QListWidget
+widget = QListWidget()
+widget.addItems(["One", "Two", "Three", "Friendly Thug 52 NGG - AMMO"])
