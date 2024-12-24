@@ -3,7 +3,7 @@ def backpack(max_weight=0, stuff=None):
     k = 0
     bank = 0
     while True:
-        if stuff_list[k]["weight"] < 0:
+        if stuff_list[k]["weight"] <= 0:
             max_weight += abs(stuff_list[k]["weight"])
             bank += stuff_list[k]["price"]
             k += 1
