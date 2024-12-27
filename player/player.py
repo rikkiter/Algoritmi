@@ -14,7 +14,7 @@ class Json:
         if to_json is None:
             to_json = dict.fromkeys([song.name for song in Path("music").iterdir()], 1)
         with self.json_music.open('w', encoding='UTF-8') as json_music:
-            json.dump(to_json, json_music)
+            json.dump(to_json, json_music, indent=2)
 
     def get_json(self):
         with self.json_music.open(encoding='UTF-8') as json_music:
