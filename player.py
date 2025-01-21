@@ -34,4 +34,4 @@ class Json:
             temp = nums[:value]
             nums = nums[value:]
             songs |= dict.fromkeys(temp, key)
-        return Path(f'../music/{songs[random.randint(0, size - 1)]}')
+        return Path(f'music/{songs[random.randint(0, size - 1)]}')
