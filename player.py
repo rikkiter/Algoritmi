@@ -26,12 +26,22 @@ class Json:
 
     def get_json_song(self):
         json = self.get_json()
-        size = sum(json.values())
+        size = sum(map(lambda x: x[0], json.values()))
+        nums = [i for i in range(size)]
+        folders = {}
+        for key, value in json.items():
+            random.shuffle(nums)
+            temp = nums[:value[0]]
+            nums = nums[value[0]:]
+            folders |= dict.fromkeys(temp, key)
+        folder = folders[random.randint(0, size - 1)]
+
+        size = sum(json[folder][1].values())
         nums = [i for i in range(size)]
         songs = {}
-        for key, value in json.items():
+        for key, value in json[folder][1].items():
             random.shuffle(nums)
             temp = nums[:value]
             nums = nums[value:]
             songs |= dict.fromkeys(temp, key)
-        return Path(f'music/{songs[random.randint(0, size - 1)]}')
+        return Path(f'music/{folder}/{songs[random.randint(0, size - 1)]}')
