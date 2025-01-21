@@ -14,7 +14,8 @@ class Json:
         if to_json is None:
             to_json = dict()
             for folder in Path("music").iterdir():
-                to_json |= {folder.name: (1, dict.fromkeys([song.name for song in Path(f"music/{folder.name}").iterdir()], 1))}
+                to_json |= {folder.name: (1, dict.fromkeys([song.name for song in Path(
+                    f"../music/{folder.name}").iterdir()], 1))}
             #to_json = dict.fromkeys([song.name for song in Path("music").iterdir()], 1)
         with self.json_music.open('w', encoding='UTF-8') as json_music:
             json.dump(to_json, json_music, indent=2)
@@ -33,4 +34,4 @@ class Json:
             temp = nums[:value]
             nums = nums[value:]
             songs |= dict.fromkeys(temp, key)
-        return Path(f'music/{songs[random.randint(0, size-1)]}')
+        return Path(f'../music/{songs[random.randint(0, size - 1)]}')
