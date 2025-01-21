@@ -19,7 +19,7 @@ class Gui(QMainWindow):
         self.view_songs()
         self.connect()
         self.json_flag = False
-        self.song = Song(self.json.get_json_song())
+        # self.song = Song(self.json.get_json_song())
         self.playlist.add_directory(self.json.music, recurse=True)
 
     def connect(self):
@@ -52,7 +52,8 @@ class Gui(QMainWindow):
 
     def view_songs(self):
         self.ui.listwidget.clear()
-        self.ui.listwidget.addItems(self.json.get_json())
+        for songs in self.json.get_json().values():
+            self.ui.listwidget.addItems(songs[1].keys())
 
     def update_json(self):
         self.json.set_json()
