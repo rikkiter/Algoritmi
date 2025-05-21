@@ -39,8 +39,18 @@ class BinaryTree:
         else:
             return self.search(value, branch.right)
 
-    def remove(self, value):
-        pass
+    def remove(self, value: int, branch=None):
+        if branch is None:
+            branch = self.head
+        if value == branch.value:
+            left = branch.left
+            prev.right = branch.right
+        if value < branch.value:
+            prev = branch
+            return self.search(value, branch.left)
+        else:
+            prev = branch
+            return self.search(value, branch.right)
 
 bt = BinaryTree()
 bt.add(5)
