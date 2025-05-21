@@ -29,15 +29,18 @@ class BinaryTree:
                     else:
                         temp = temp.right
 
-    def search(self, value: int, branch=None):
+    def search(self, value: int, branch=None, flag=True):
         if branch is None:
-            branch = self.head
+            if flag:
+                branch = self.head
+            else:
+                return f"No {value} in Tree"
         if value == branch.value:
             return value
         if value < branch.value:
-            return self.search(value, branch.left)
+            return self.search(value, branch.left, False)
         else:
-            return self.search(value, branch.right)
+            return self.search(value, branch.right, False)
 
     def remove(self, value: int, branch=None):
         if branch is None:
@@ -46,17 +49,14 @@ class BinaryTree:
             left = branch.left
             prev.right = branch.right
         if value < branch.value:
-            prev = branch
             return self.search(value, branch.left)
         else:
-            prev = branch
             return self.search(value, branch.right)
 
 bt = BinaryTree()
 bt.add(5)
 bt.add(3)
 bt.add(7)
-bt.add(4)
 bt.add(9)
 print(bt.head.right.value)
-print(bt.search(3))
+print(bt.search(0))
