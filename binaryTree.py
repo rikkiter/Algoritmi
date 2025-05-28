@@ -9,25 +9,22 @@ class BinaryTree:
     def __init__(self):
         self.head = None
 
-    def add(self, value: int):
+    def add(self, value: int, branch=None):
         if self.head is None:
             self.head = Branch(value)
             return
+        if branch is None:
+            branch = self.head
+        if value < branch.value:
+            if branch.left is None:
+                branch.left = Branch(value)
+                return
+            return self.add(value, branch.left)
         else:
-            temp = self.head
-            while True:
-                if temp.value > value:
-                    if temp.left is None:
-                        temp.left = Branch(value)
-                        return
-                    else:
-                        temp = temp.left
-                else:
-                    if temp.right is None:
-                        temp.right = Branch(value)
-                        return
-                    else:
-                        temp = temp.right
+            if branch.right is None:
+                branch.right = Branch(value)
+                return
+            return self.add(value, branch.right)
 
     def search(self, value: int, branch=None, flag=True):
         if branch is None:
@@ -94,11 +91,11 @@ class BinaryTree:
 bt = BinaryTree()
 for num in [17, 5, 25, 19, 30, 28, 70, 3, 9]:
     bt.add(num)
-bt.search(0)
-bt.search(19)
-bt.search(70)
-bt.remove(30)
-bt.search(30)
-bt.search(70)
-bt.remove(28)
-bt.search(19)
+print(bt.search(0))
+print(bt.search(19))
+print(bt.search(70))
+print(bt.remove(30))
+print(bt.search(30))
+print(bt.search(70))
+print(bt.remove(28))
+print(bt.search(19))
